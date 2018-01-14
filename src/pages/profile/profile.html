@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-navbar color='navbarColor'>
+    <ion-title>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-12 style="font-size:20px">BeFit Fitness</ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="bg-style2">
+  <div class="padding">
+    <div class="bg-padding">
+
+      <div style="text-align:center;padding-top:5%">
+        <svg #barcode id="barcode"></svg>
+      </div>
+
+
+
+      <div style="background:#baed88;padding:1%;border-radius:4px">
+        <ion-grid>
+          <ion-row class="row-style">
+            <ion-col col-2>
+              <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/name.png" width="30px" height="30px">
+            </ion-col>
+            <ion-col col-10>{{name}}</ion-col>
+          </ion-row>
+          <ion-row class="row-style">
+            <ion-col col-2>
+              <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/age.png" width="30px" height="30px">
+            </ion-col>
+            <ion-col col-8>{{birthday}} (อายุ {{age}} ปี)</ion-col>
+          </ion-row>
+          <ion-row class="row-style">
+            <ion-col col-2>
+              <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/tel.png" width="30px" height="30px">
+            </ion-col>
+            <ion-col col-8>{{tel}}</ion-col>
+          </ion-row>
+          <ion-row class="row-style">
+            <ion-col col-2>
+              <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/address.png" width="30px" height="30px">
+            </ion-col>
+            <ion-col col-8>{{address}}</ion-col>
+          </ion-row>
+          <ion-row class="row-style">
+            <ion-col col-2>
+              <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/weight.png" width="30px" height="30px">
+            </ion-col>
+            <ion-col col-2>{{weight}} กก.</ion-col>
+            <ion-col col-2>
+                <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/heigth.png" width="30px" height="30px">
+              </ion-col>
+              <ion-col col-2>{{height}} ซม.</ion-col>
+          </ion-row>
+    
+          <ion-row class="row-style">
+            <ion-col col-2>
+              <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/disease.png" width="30px" height="30px">
+            </ion-col>
+            <ion-col col-6>{{disease}}</ion-col>
+          </ion-row>
+          <ion-row class="row-style">
+              <ion-col col-2>
+              <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/email.png" width="30px" height="30px">
+              </ion-col>
+            <ion-col col-8>{{email}}</ion-col>
+          </ion-row>
+          <ion-row class="row-style">
+              <ion-col col-2>
+              <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/income.png" width="30px" height="30px">
+              </ion-col>
+            <ion-col col-8>{{income}} บาท/เดือน</ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+      <div style="text-align:center;padding-top:3%">
+          <button ion-button color="btn_login" class="btn_login" (click)="logout()">ออกจากระบบ</button>
+      </div>
+
+    </div>
+  </div>
+
+</ion-content>

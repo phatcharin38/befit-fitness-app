@@ -1,0 +1,93 @@
+<ion-content class="bg-style">
+  <div class="padding">
+    <div>
+       <div class="image_logo">
+            <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/logo_befit2.png" width="130px" height="80px" />
+            <div *ngIf="id == 1">
+                <br>Confirm Your Pin Code
+            </div>
+            <div *ngIf="id == 2">
+                    <br>Enter Your Pin Code
+            </div>
+      </div>
+      <div class="style_pincode">
+          <div class="row">
+              <div class="col col-10 col-offset-20" *ngIf="passcode.length > 0">
+                  <ion-icon name="key" color="light"></ion-icon>
+              </div>
+              <div class="col col-10 col-offset-20" *ngIf="!(passcode.length > 0)">
+                  <ion-icon name="key" ></ion-icon>
+              </div> 
+              <div class="col col-10" *ngIf="passcode.length > 1">
+                  <ion-icon name="key" color="light"></ion-icon>
+              </div>
+              <div class="col col-10" *ngIf="!(passcode.length > 1)">
+                  <ion-icon name="key" ></ion-icon>
+              </div>
+              <div class="col col-10" *ngIf="passcode.length > 2">
+                  <ion-icon name="key" color="light"></ion-icon>
+              </div>
+              <div class="col col-10" *ngIf="!(passcode.length > 2)">
+                  <ion-icon name="key" ></ion-icon>
+              </div>
+              <div class="col col-10" *ngIf="passcode.length > 3">
+                  <ion-icon name="key" color="light"></ion-icon>
+              </div>
+              <div class="col col-10" *ngIf="!(passcode.length > 3)">
+                  <ion-icon name="key" ></ion-icon>
+              </div>
+          </div>     
+      </div>
+
+      <div>
+        <div class="row">
+            <div class="col col-20 col-offset-20">
+                <button class="button button-light button-stretch" (click)="add(1)">1</button>
+            </div>
+            <div class="col col-20">
+                <button class="button button-light button-stretch" (click)="add(2)">2</button>
+            </div>
+            <div class="col col-20">
+                <button class="button button-light button-stretch" (click)="add(3)">3</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-20 col-offset-20">
+                <button class="button button-light button-stretch" (click)="add(4)">4</button>
+            </div>
+            <div class="col col-20">
+                <button class="button button-light button-stretch" (click)="add(5)">5</button>
+            </div>
+            <div class="col col-20">
+                <button class="button button-light button-stretch" (click)="add(6)">6</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-20 col-offset-20">
+                <button class="button button-light button-stretch" (click)="add(7)">7</button>
+            </div>
+            <div class="col col-20">
+                <button class="button button-light button-stretch" (click)="add(8)">8</button>
+            </div>
+            <div class="col col-20">
+                <button class="button button-light button-stretch" (click)="add(9)">9</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-20 col-offset-20">
+                <button class="button button-light button-stretch"></button>
+            </div>
+            <div class="col col-20">
+                <button class="button button-light button-stretch" (click)="add(0)">0</button>
+            </div>
+            <div class="col col-20">
+                <button class="button icon ion-arrow-left-a button-light button-stretch" (click)="delete()">
+                  <ion-icon name="backspace" ></ion-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+  </div>
+</div>
+</ion-content>

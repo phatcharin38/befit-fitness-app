@@ -1,0 +1,25 @@
+<ion-content class="bg-style">
+  
+    <div class="image_logo">
+      <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/logo_befit2.png" width="200px" height="150px" />
+    </div>
+    <div class="padding">
+      <div class="padding2 bg-padding">
+        <span>
+          <label>Username : </label>
+        </span>
+        <span>
+          <ion-input [(ngModel)]="username" class="input" type="text"></ion-input>
+        </span>
+        <span>
+          <label>Password : </label>
+        </span>
+        <span>
+          <ion-input [(ngModel)]="password" class="input" type="password"></ion-input>
+        </span>
+        <p style="text-align : center">
+          <button ion-button  color="btn_login" class="btn_login" (click)="gotoLogin(username,password);" >Login</button>
+        </p>
+      </div>
+  </div>
+  </ion-content>

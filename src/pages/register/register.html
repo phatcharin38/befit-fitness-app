@@ -1,0 +1,193 @@
+<!--
+  Generated template for the RegisterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!-- <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+<link href="https://code.ionicframework.com/nightly/css/ionic.min.css" rel="stylesheet">
+<script src="https://code.ionicframework.com/nightly/js/ionic.bundle.js"></script> -->
+
+<ion-content class="bg-style">
+
+  <!-- <div class="image_logo2">
+    <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/logo_befit2.png" width="150px" height="100px" />
+  </div> -->
+  <div class="padding" style="padding-top:5%">
+    <div class="padding2 bg-padding">
+      <h1 style="text-align:center">
+        <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/logo_befit2.png" width="70px" height="40px" /> Sign up</h1>
+      <ion-segment [(ngModel)]="signup">
+        <ion-segment-button value="profile">
+          Profile
+        </ion-segment-button>
+        <ion-segment-button value="other">
+          Other
+        </ion-segment-button>
+        <ion-segment-button value="condition">
+          Condition
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+
+    <div [ngSwitch]="signup">
+      <!-- profile -->
+      <ion-grid *ngSwitchCase="'profile'">
+        <ion-row>
+          <ion-col col-3>
+            <ion-label>ID Card : </ion-label>
+          </ion-col>
+          <ion-col col-9>
+            <ion-input [(ngModel)]="idcard" class="input" type="text" placeholder="X-XXXX-XXXXX-XX-X" (keyup) = "setIdCard($event)"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row radio-group [(ngModel)]="gender">
+          <ion-col col-3>Gender :</ion-col>
+          <ion-col col-3>
+            <ion-radio value="M"></ion-radio> Male
+          </ion-col>
+          <ion-col col-3>
+            <ion-radio value="F"></ion-radio> Female
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-3>
+            <ion-label>Firstname : </ion-label>
+          </ion-col>
+          <ion-col col-9>
+            <ion-input [(ngModel)]="firstname" class="input" type="text" placeholder="Enter Your Firstname"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-3>
+            <ion-label>Lastname : </ion-label>
+          </ion-col>
+          <ion-col col-9>
+            <ion-input [(ngModel)]="lastname" class="input" type="text" placeholder="Enter Your Lastname"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-3>
+            <ion-label>Birthday : </ion-label>
+          </ion-col>
+          <ion-col col-9>
+            <ion-datetime class="ion-date" displayFormat="DD MMMM YYYY" [(ngModel)]="date" (change) = "changDate(date)"></ion-datetime>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-3>
+            <ion-label>Age : </ion-label>
+          </ion-col>
+          <ion-col col-9>
+            <ion-input [(ngModel)]="age" class="input" type="number" placeholder="Enter Your Age"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-3>
+              <ion-label>Tel. : </ion-label>
+            </ion-col>
+            <ion-col col-9>
+              <ion-input [(ngModel)]="tel" class="input" type="text" placeholder="XX-XXXXXXXX" (keyup) = "setTel($event)"></ion-input>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12 style="text-align:center">
+            <button ion-button class="btn_next" (click)="goNext(2);">Next
+              <ion-icon name="arrow-round-forward"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <!-- other -->
+      <ion-grid *ngSwitchCase="'other'">
+        <ion-row>
+          <ion-col col-3>
+            <ion-label>Address : </ion-label>
+          </ion-col>
+          <ion-col col-9>
+            <ion-textarea [(ngModel)]="address" placeholder="Enter a description" style="background-color:#ffffff" rows="3"></ion-textarea>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-3>
+              <ion-label>Income : </ion-label>
+            </ion-col>
+            <ion-col col-9>
+              <ion-input [(ngModel)]="income" class="input" type="text" placeholder="Enter Your Salary"></ion-input>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-3>
+            <ion-label>Height : </ion-label>
+          </ion-col>
+          <ion-col col-5>
+            <ion-input [(ngModel)]="height" class="input" type="text" placeholder="Enter Your Height"></ion-input>
+          </ion-col>
+          <ion-col col-4>
+            <!-- <ion-input class="input" type="text" value="{{income}}" (onkeyup)="setIncome(income2)"></ion-input> -->
+            <ion-label>CM.</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-3>
+            <ion-label>Weight : </ion-label>
+          </ion-col>
+          <ion-col col-5>
+            <ion-input [(ngModel)]="weight" class="input" type="text" placeholder="Enter Your Width"></ion-input>
+          </ion-col>
+          <ion-col col-4>
+            <ion-label>Kg.</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-5>
+            <ion-label>Congenital Disease : </ion-label>
+          </ion-col>
+          <ion-col col-7>
+            <ion-input [(ngModel)]="disese" class="input" type="text" placeholder="Enter Your Disease"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-3>
+            <ion-label>Email : </ion-label>
+          </ion-col>
+          <ion-col col-9>
+            <ion-input [(ngModel)]="email" class="input" type="text" placeholder="user@hotmail.com"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12 style="text-align:center">
+            <button ion-button class="btn_next" (click)="goNext(3);">Next
+              <ion-icon name="arrow-round-forward"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <!-- condition -->
+      <ion-grid *ngSwitchCase="'condition'">
+        <ion-row>
+          <ion-col col-12>
+            <label style="font-size:16px">&nbsp;&nbsp;&nbsp;&nbsp;The information from users will be kept confidential. If any of the conditions change.
+              The developer reserves the right to make any changes without notice to the user.</label>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col col-12 style="text-align:center">
+            <ion-checkbox color="dark" [(ngModel)]="condition" checked = "true"></ion-checkbox>
+            <label>&nbsp;I accept!</label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12 style="text-align:center">
+            <!-- (click)="goNextPincode(idcard,gender,firstname,lastname,date,address,income,height,width,disese,email);" -->
+            <button ion-button class="btn_next" (click)="goNextPincode(idcard,gender,firstname,lastname,date,age,tel,address,income,weight,height,disese,email,condition)">Next
+              <ion-icon name="arrow-round-forward"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+    </div>
+  </div>
+</ion-content>

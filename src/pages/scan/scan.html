@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-navbar color='navbarColor'>
+      <ion-title>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-12 style="font-size:20px">BeFit Fitness</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+
+<ion-content>
+  <button ion-button color="btn_login" class="btn_login" (click) = "scan()">Scan</button>
+  <br>
+  <h1>Cancelled : {{data.cancelled}}</h1>
+  <h1>Format : {{data.format}}</h1>
+  <h1>Text : {{data.text}}</h1>
+
+
+  <button ion-button color="btn_login" class="btn_login" (click) = "encode()">Scan</button>
+  <!-- <ngx-qrcode qrc-value = "createCode"></ngx-qrcode> -->
+
+  <ion-input type="text" [(ngModel)]="encodeData" ></ion-input>   
+   <button ion-button (click)="encodeText()">Encode Text</button>
+
+   <svg #barcode id="barcode"></svg>
+</ion-content>
