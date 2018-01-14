@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { GetticketPage } from '../getticket/getticket';
+import { HttpClient } from '@angular/common/http';
 /**
  * Generated class for the PromotionPage page.
  *
@@ -15,16 +16,28 @@ import { GetticketPage } from '../getticket/getticket';
 })
 export class PromotionPage {
   pushGetticketPage: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  promotions : any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private httpClient: HttpClient) {
     this.pushGetticketPage = GetticketPage;
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PromotionPage');
+    this.setAllPromotion();
   }
 
-  getTicket(){
-    this.navCtrl.push(this.pushGetticketPage);
+  setAllPromotion(){
+    var url = 'http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/service/setAllPromotion.php';
+    console.log(url);
+    this.httpClient.get(url).subscribe((data: any) => {
+        this.promotions = data;
+        console.log(this.promotions)
+      }
+    );
+  }
+
+  getTicket(id){
+    this.navCtrl.push(this.pushGetticketPage,{id:id});
   }
 
 }

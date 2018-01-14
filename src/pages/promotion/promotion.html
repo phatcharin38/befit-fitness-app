@@ -12,9 +12,9 @@
 
 <ion-content class="bg-style2">
   <div class="card-background-page">
-    <ion-card>
-      <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/fitnessfirst.jpg" width="100%" height="150px" style="opacity: 0.7;" />
-      <div class="card-title">Fitness First</div>
+    <ion-card *ngFor="let item of promotions">
+      <img src= {{item.image}} width="100%" height="150px" style="opacity: 0.7;" />
+      <div class="card-title">{{item.name_fitness}}</div>
       <div class="detail-head">Promotion!!
         <span class="rating">
             <ion-icon  name="star" color="star"></ion-icon>
@@ -22,12 +22,12 @@
             <ion-icon  name="star" color="star"></ion-icon>
         </span>        
       </div>
-      <div class="detail">Packge 3 Month 2599 THB</div>
+      <div class="detail">{{item.detail_pro}}</div>
       <div class="buttonTic">
-        <a (click)="getTicket()">Got It</a>
-        </div>
+        <a (click)="getTicket(item.code_promotion)">Got It</a>
+      </div>
     </ion-card>
-    <ion-card>
+    <!-- <ion-card>
         <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/ksb2.jpg" width="100%" height="150px" style="opacity: 0.7;" />
         <div class="card-title">KSB Gym</div>
         <div class="detail-head">Promotion!!
@@ -70,7 +70,7 @@
             <div class="buttonTic">
               <a (click)="getTicket()">Got It</a>
               </div>
-          </ion-card>
+          </ion-card> -->
 
   </div>
 

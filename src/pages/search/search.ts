@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { HttpClient } from '@angular/common/http';
+import { FitnessPage } from '../fitness/fitness';
 /**
  * Generated class for the SearchPage page.
  *
@@ -16,44 +17,47 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class SearchPage {
   item: any = [];
   searchQuery: string = '';
-  items: any = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  fitness : any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private httpClient: HttpClient) {
     this.initializeItems();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SearchPage');
+    // this.setAllFitness();
   }
 
   initializeItems() {
-    this.items = [ 
-      [{id:1},{name:'Fitness First'},{address:'The mall korat'},{img:'http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/fitnessfirst.jpg'}],
-      [{id:2},{name:'KSB Gym'},{address:'Maeng'},{img:'http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/ksb2.jpg'}],
-      [{id:3},{name:'Maungthai Fitness'},{address:'Save One'},{img:'http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/maungthai.jpg'}],
-      [{id:4},{name:'Maungthai Fitness'},{address:'Save One'},{img:'http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/maungthai.jpg'}]
-    ];
-    // this.items = [
-    //   'Amsterdam',
-    //   'Bogota',
-    //   'Nook'
-    // ];
+    var url = 'http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/service/setAllFitness.php';
+    console.log(url);
+    this.httpClient.get(url).subscribe((data: any) => {
+        console.log(data)
+        this.fitness = data;
+      }
+    );
   }
 
   getItems(ev: any) {
-    // Reset items back to all of the items
-    this.initializeItems();
-
     // set val to the value of the searchbar
     let val = ev.target.value;
 
-    // if the value is an empty string don't filter the items
-    if (val && val.trim() != '') {
-      this.items = this.items.filter((item) => {
-        // console.log(item);
-        return (item[1].name.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      })
+    // Reset items back to all of the items
+    if(val == ''){
+      this.initializeItems();
+    }else{
+      // if the value is an empty string don't filter the items
+      if (val && val.trim() != '') {
+        this.fitness = this.fitness.filter((item) => {
+        return (item.name_fitness.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        })
+      }
     }
   }
+
+  goToFitness(val){
+    this.navCtrl.push(FitnessPage,{id:val});
+  }
+
 
 
 }

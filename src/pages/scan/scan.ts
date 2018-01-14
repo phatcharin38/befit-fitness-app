@@ -47,7 +47,7 @@ export class ScanPage {
   }
 
   async encode(){
-    const result = await this.barcodeScanner.encode(this.barcodeScanner.Encode.TEXT_TYPE,"snooker");
+    // const result = await this.barcodeScanner.encode(this.barcodeScanner.Encode.TEXT_TYPE,"snooker");
   }
 
   encodeText(){

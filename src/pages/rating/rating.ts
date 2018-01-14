@@ -73,9 +73,9 @@ export class RatingPage {
         }else{
           //http 
           var json2 = JSON.stringify({code:'system',point:this.emoSys,type:val});
-          var url = 'http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/service/sendRatingApplication.php?data=' + json2;
-          console.log(url);
-          this.httpClient.get(url).subscribe((data: any) => {
+          var url2 = 'http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/service/sendRatingApplication.php?data=' + json2;
+          console.log(url2);
+          this.httpClient.get(url2).subscribe((data: any) => {
               console.log(data)
               if(data.result == 'SUCCESS'){
                 this.changeEmoSystem(0);
