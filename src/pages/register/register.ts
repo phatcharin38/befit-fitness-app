@@ -4,6 +4,7 @@ import { AlertController } from 'ionic-angular';
 import { SetpincodePage } from '../setpincode/setpincode';
 import { Storage } from '@ionic/storage';
 import { HttpClient } from '@angular/common/http';
+
 /**
  * Generated class for the RegisterPage page.
  *
@@ -105,19 +106,23 @@ export class RegisterPage {
             this.storage.set('member', data.member);
             this.navCtrl.push(this.pushPincode);
           }else{
-            console.log("Can not insert!!")
+            let alert = this.alertCtrl.create({
+              title: '<img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/signFalse.png" width="70px" height="70px">',
+              subTitle: 'บันทึกไม่สำเร็จ',
+              cssClass: 'alertDanger'
+            });
+            alert.present();
           }
         }
       );
       
     
     } else {
-      let alert = this.alertCtrl.create({
-        title: 'Sign up',
-        subTitle: 'Please Acppet Us Condition ^^',
-        buttons: ['OK']
-      });
-      alert.present();
+        let alert = this.alertCtrl.create({
+          title: '<img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/signWarning.png" width="70px" height="70px">',
+          subTitle: 'กรุณากดยอมรับเงื่อนไข',
+        });
+        alert.present();
 
     }
   }

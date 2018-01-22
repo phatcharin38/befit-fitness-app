@@ -346,3 +346,41 @@
     .row-style{
         background:#f0f0f0
     }
+
+    .btn_edit {
+        background-color: #e8f083;
+        color: #161616;
+        text-align: center;
+        border-radius: 4px;
+    }
+
+    .btn_delete {
+        background-color: #f09c9c;
+        color: #161616;
+        text-align: center;
+        border-radius: 4px;
+    }
+
+    ion-scroll {
+        white-space: nowrap;
+        height: 420px;
+
+    }
+
+    table, th, td {
+        border: 3px solid #baed88;
+        padding: 8px;
+        background-color:#f0f0f0;
+     }
+     th{
+        background-color:#90bcde;
+     }
+
+    
+    .alert-head {
+        text-align: center !important;
+        text-align: center !important;
+        padding: 24px 24px 20px;
+    }
+
+    

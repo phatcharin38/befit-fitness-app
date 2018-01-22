@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
+import { AlertController } from 'ionic-angular';
+
 /**
  * Generated class for the RatingPage page.
  *
@@ -19,7 +21,8 @@ export class RatingPage {
   rating : string = 'fitness';
   fitness : any;
   selectfitness : String = "";
-  constructor(public navCtrl: NavController, public navParams: NavParams, private httpClient: HttpClient) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private httpClient: HttpClient,
+    private alertCtrl: AlertController) {
     this.setAllFitness();
   }
 
@@ -51,7 +54,13 @@ export class RatingPage {
     console.log(this.selectfitness);
       if(val == 'F'){       
         if(this.selectfitness == "" || this.emo == 0){
-          alert("Please Select Fitness Or Select Point");
+          
+            let alert = this.alertCtrl.create({
+              title: '<img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/signWarning.png" width="70px" height="70px">',
+              subTitle: 'กรุณาเลือกใส่ข้อมูลให้เรียบร้อย',
+            });
+            alert.present();
+          
         }else{
           //http       
           var json = json = JSON.stringify({code:this.selectfitness,point:this.emo,type:val});
@@ -60,6 +69,13 @@ export class RatingPage {
           this.httpClient.get(url).subscribe((data: any) => {
               console.log(data)
               if(data.result == 'SUCCESS'){
+
+                let alert = this.alertCtrl.create({
+                  title: '<img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/signTrue.png" width="70px" height="70px">',
+                  subTitle: 'สำเร็จ',
+                });
+                alert.present();
+
                 this.changeEmo(0);
                 this.selectfitness = "";
               }
@@ -69,7 +85,11 @@ export class RatingPage {
         }
       }else{
         if(this.emoSys == 0){
-          alert("Select Point");             
+          let alert = this.alertCtrl.create({
+            title: '<img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/signWarning.png" width="70px" height="70px">',
+            subTitle: 'กรุณาเลือกใส่ข้อมูลให้เรียบร้อย',
+          });
+          alert.present();     
         }else{
           //http 
           var json2 = JSON.stringify({code:'system',point:this.emoSys,type:val});
@@ -78,6 +98,11 @@ export class RatingPage {
           this.httpClient.get(url2).subscribe((data: any) => {
               console.log(data)
               if(data.result == 'SUCCESS'){
+                let alert = this.alertCtrl.create({
+                  title: '<img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/signTrue.png" width="70px" height="70px">',
+                  subTitle: 'สำเร็จ',
+                });
+                alert.present();
                 this.changeEmoSystem(0);
               }
             }

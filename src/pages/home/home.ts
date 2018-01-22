@@ -8,6 +8,13 @@ import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 import { LoadingPage } from '../loading/loading';
 import { RatingPage } from '../rating/rating';
+import { HistoryPage } from '../history/history';
+import { EquipmentPage } from '../equipment/equipment';
+import { BookingPage } from '../booking/booking';
+import { NoticePage } from '../notice/notice';
+
+
+
 /** 
  * Generated class for the HomePage page.
  *
@@ -27,8 +34,12 @@ export class HomePage {
   json:any;
   name:String = "";
   address:String = "";
+
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              private httpClient:HttpClient,private storage: Storage,public appCtrl: App) {
+              private httpClient:HttpClient,private storage: Storage,public appCtrl: App
+              ) {
     this.pushPromotionPage = PromotionPage;
     this.pushMapPage = MapPage;
     this.pushSearchPage = SearchPage;
@@ -64,19 +75,19 @@ export class HomePage {
   }
 
   goToSearchEqipment(){
-    console.log('goToSearchEqipment');
+    this.navCtrl.push(EquipmentPage);
   }
 
   goToSearchMap(){
     this.navCtrl.push(this.pushMapPage);
   }
 
-  goToSearchBooking(){
-    console.log('goToSearchBooking');
+  goToSearchBooking(){  
+    this.navCtrl.push(BookingPage);
   }
 
   goToViewBooking(){
-    console.log('goToViewBooking');
+    this.navCtrl.push(HistoryPage);
   }
 
   goToRating(){
@@ -84,11 +95,16 @@ export class HomePage {
   }
 
   goToReport(){
-    console.log('goToReport');
+
+    this.navCtrl.push(NoticePage);
+    
   }
 
   logout(){
-    this.appCtrl.getRootNav().setRoot(LoadingPage);
+    this.appCtrl.getRootNav().setRoot(LoadingPage); 
   }
+
+
+  
 
 }

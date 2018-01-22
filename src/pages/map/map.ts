@@ -45,8 +45,6 @@ export class MapPage {
   currentLocation() {
     //location-lat long current
     this.geolocation.getCurrentPosition().then((resp) => {
-      // resp.coords.latitude
-      // resp.coords.longitude   
       const location = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
       //mao option 
       const options = {
@@ -67,7 +65,7 @@ export class MapPage {
             //add fitness
             const location = new google.maps.LatLng(data[key].latitude, data[key].longitude);
             var image2 = "http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/icon-map.png";
-            this.addMarker(location, this.map,data[key].code_fitness,image2)
+            this.addMarker(location, this.map,data[key].id,image2);
             
           }
         }
@@ -79,25 +77,34 @@ export class MapPage {
   }
 
   addMarker(position, map,text,image) { 
-    
-    return  new google.maps.Marker({
+    if(text == 'You'){
+
+      var marker = new google.maps.Marker({
+        position : position,
+        title: text,
+        map: map,
+        icon: image
+      });
+      google.maps.event.addListener(marker, 'click', () => {
+        let alert = this.alertCtrl.create({
+          title: '<img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/signWarning.png" width="70px" height="70px">',
+          subTitle: 'คุณอยู่ที่นี่',
+        });
+        alert.present();  
+      });
+      
+    }else{
+    var marker = new google.maps.Marker({
       position : position,
       title: text,
       map: map,
       icon: image
-    }).addListener('click', function() {
-      console.log(text);
-      alert(text);
-      // this.goToFitness();
-      // this.navCtrl.push(FitnessPage);
-      // let alert = this.alertCtrl.create({
-      //   title: 'Login',
-      //   subTitle: '' + text,
-      //   buttons: ['OK']
-      // });
-      // alert.present();
     });
-   
+    google.maps.event.addListener(marker, 'click', () => {
+      //infoWindow.open(this.map, marker);
+      this.navCtrl.push(FitnessPage,{id:text});
+    });
   }
+}
 
 }

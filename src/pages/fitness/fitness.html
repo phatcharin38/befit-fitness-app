@@ -23,7 +23,6 @@
 
       <div style="background:#baed88;padding:1%;border-radius:4px">
         <ion-grid>
-        
           <ion-row class="row-style">
             <ion-col col-2>
               <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/icon-map.png" width="25px" height="25px">
@@ -34,17 +33,61 @@
             <ion-col col-2>
               <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/date.png" width="25px" height="25px">
             </ion-col>
-            <ion-col col-10>{{item.booking_system}}</ion-col>
+            <ion-col col-6>{{item.booking_system}}</ion-col>
+            <ion-col col-3 style="text-align:center" *ngIf="booking == 'YES'"> 
+              <button ion-button color="btn_login" class="btn_login" (click)="goToBook()">ตารางเวลา</button>
+            </ion-col>
           </ion-row>
           <ion-row class="row-style">
             <ion-col col-2>
               <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/name.png" width="30px" height="30px">
             </ion-col>
-            <ion-col col-10>{{item.open_fitness}}</ion-col>
+            <ion-col col-10>
+              จันทร์-ศุกร์ เวลา {{item.open_fitness}}-{{item.close_fitness}} น.<br>
+              เสาร์-อาทิตย์ เวลา {{item.open_holiday}}-{{item.close_holiday}} น.
+            </ion-col>
           </ion-row>
-          
+
         </ion-grid>
       </div>
+
+      <div style="padding-top:5%">
+        <div style="background:#baed88;padding-left:3%;padding-right:3%;padding-bottom:1%;border-radius:4px;">
+
+          <ion-grid>
+            <ion-row>
+              <ion-col col-9 style="text-align:left">
+                <h5>ข้อมูลอุปกรณ์ออกกำลังกาย</h5>
+              </ion-col>
+             
+            </ion-row>
+          </ion-grid>
+          <!-- booking = no -->
+          <ion-list *ngIf="booking == 'NO'">
+            <ion-item class="row-style" *ngFor="let item of equipment">
+              <h2>{{item.name}}</h2>
+              <p>จำนวน : {{item.amount}} เครื่อง</p>
+              <p>รายละเอียด : {{item.description}}</p>
+              <ion-thumbnail item-end>
+                <img src= {{item.image}}>
+              </ion-thumbnail>
+            </ion-item>
+          </ion-list>
+          <!-- booking = yes -->
+          <ion-list *ngIf="booking == 'YES'">
+            <ion-item class="row-style" *ngFor="let item of equipment" (click)="viewBooking()">
+              <h2>{{item.name}}</h2>
+              <p>จำนวน : {{item.amount}} เครื่อง</p>
+              <p>รายละเอียด : {{item.description}}</p>
+              <ion-thumbnail item-end>
+                <img src= {{item.image}}>
+              </ion-thumbnail>
+            </ion-item>
+          </ion-list>
+
+        </div>
+      </div>
+      <!-- end -->
 
     </div>
   </div>

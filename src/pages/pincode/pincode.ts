@@ -56,9 +56,18 @@ export class PincodePage {
               (data: any) => {
                 console.log(data)
                 if (data.result === 'SUCCESS') {
+                  let alert = this.alertCtrl.create({
+                    title: '<img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/signTrue.png" width="70px" height="70px">',
+                    subTitle: 'สำเร็จ',
+                  });
+                  alert.present();
                   this.navCtrl.push(this.pushTabsPage);
                 } else {
-                  console.log("Can not set pincode!!")
+                  let alert = this.alertCtrl.create({
+                    title: '<img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/signFalse.png" width="70px" height="70px">',
+                    subTitle: 'รหัสไม่ถูกต้อง',
+                  });
+                  alert.present();
                 }
               }
               );
@@ -80,12 +89,16 @@ export class PincodePage {
             (data: any) => {
               console.log(data)
               if (data.result === 'SUCCESS') {
+                let alert = this.alertCtrl.create({
+                  title: '<img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/signTrue.png" width="70px" height="70px">',
+                  subTitle: 'สำเร็จ',
+                });
+                alert.present();
                 this.navCtrl.push(this.pushTabsPage);
               } else {
                 let alert = this.alertCtrl.create({
-                  title: 'Login',
-                  subTitle: 'Your Pincode Incorrect!',
-                  buttons: ['OK']
+                  title: '<img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/signFalse.png" width="70px" height="70px">',
+                  subTitle: 'รหัสไม่ถูกต้อง',
                 });
                 alert.present();
                 this.passcode = "";

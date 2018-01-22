@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
-import { ProfilePage } from '../profile/profile';
-
+import { HttpClient } from '@angular/common/http';
+import { Storage } from '@ionic/storage';
 /**
  * Generated class for the HistoryPage page.
  *
@@ -17,11 +17,8 @@ import { ProfilePage } from '../profile/profile';
 })
 export class HistoryPage {
 
-  pushHomePage: any;
-  pushProfilePage: any;
   myDate: any;
-  date: any;
-  dataItem:any = [];
+  date2: any;
   month: any = [];
   d: any = "";
   m: any = "";
@@ -29,89 +26,104 @@ export class HistoryPage {
   m2: any = "";
   i: any = 0;
   n: any = 0;
+  date:any
+  histoty: any = [{}];
+  json:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController) {
-    this.pushProfilePage = ProfilePage;
-    this.date = new Date().toISOString();
-    this.dataItem = [
-                    {
-                      date:'19 December 2017',
-                      data : [{ id : 1,equipment : 'Treadmill-01',time:'10.30 - 11.00',status:'close'},
-                              { id : 2,equipment : 'Eilliptical-05',time:'12.30 - 12.45',status:'close'},
-                              { id : 3,equipment : 'Rowing Machine-02',time:'17.30 - 17.45',status:'close'}]
-                    },
-                    {
-                      date:'20 December 2017',
-                      data : [{ id : 1,equipment : 'Treadmill-01',time:'10.30 - 11.00',status:'close'},
-                              { id : 2,equipment : 'Eilliptical-05',time:'12.30 - 12.45',status:'close'},
-                              { id : 3,equipment : 'Rowing Machine-02',time:'17.30 - 17.45',status:'close'}]
-                    },
-                    {
-                      date:'21 December 2017',
-                      data : [{ id : 1,equipment : 'Treadmill-02',time:'10.30 - 11.00',status:'open'},
-                              { id : 2,equipment : 'Eilliptical-06',time:'12.30 - 12.45',status:'open'},
-                              { id : 3,equipment : 'Rowing Machine-08',time:'17.30 - 17.45',status:'open'}]
-                    }
-                ];
-    this.month =  [[{id:1},{name:'January'}],[{id:2},{name:'February'}],
-                  [{id:3},{name:'March'}],[{id:4},{name:'April'}],
-                  [{id:5},{name:'May'}],[{id:6},{name:'June'}],
-                  [{id:7},{name:'July'}],[{id:8},{name:'August'}],
-                  [{id:9},{name:'September'}],[{id:10},{name:'October'}],
-                  [{id:11},{name:'November'}],[{id:12},{name:'December'}]];
-  }
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
+              private httpClient:HttpClient,private storage: Storage) {
 
-  ionViewDidLoad() {   
-    console.log('ionViewDidLoad HistoryPage');
-    this.changDate(this.date);
-    
-  }
+                var options = { weekday: 'short', year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', };
+                this.date2 = new Date().toLocaleDateString('en-EN', options);
+                this.date = this.date2.split(" ")[1].split(",")[0].split("/")[2] + "-";
+            
+                if (this.date2.split(" ")[1].split(",")[0].split("/")[0] <= 9) {
+                  this.date += "0" + this.date2.split(" ")[1].split(",")[0].split("/")[0] + "-";
+                } else {
+                  this.date += this.date2.split(" ")[1].split(",")[0].split("/")[0] + "-";
+                };
+            
+                if (this.date2.split(" ")[1].split(",")[0].split("/")[1] <= 9) {
+                  this.date += "0" + this.date2.split(" ")[1].split(",")[0].split("/")[1];
+                } else {
+                  this.date += this.date2.split(" ")[1].split(",")[0].split("/")[1];
+                }
+    this.month = [[{ id: 1 }, { name: 'January' }], [{ id: 2 }, { name: 'February' }],
+    [{ id: 3 }, { name: 'March' }], [{ id: 4 }, { name: 'April' }],
+    [{ id: 5 }, { name: 'May' }], [{ id: 6 }, { name: 'June' }],
+    [{ id: 7 }, { name: 'July' }], [{ id: 8 }, { name: 'August' }],
+    [{ id: 9 }, { name: 'September' }], [{ id: 10 }, { name: 'October' }],
+    [{ id: 11 }, { name: 'November' }], [{ id: 12 }, { name: 'December' }]];
 
-  goToHome() {
-    this.navCtrl.push(this.pushHomePage);
-  }
+    this.changDate(this.date); 
+}
 
-  goToProfile() {
-    this.navCtrl.push(this.pushProfilePage);
-  }
+ionViewDidLoad() {
+  console.log('ionViewDidLoad HistoryPage');
+ 
+}
 
-  goToDelete(id) {
-    let confirm = this.alertCtrl.create({
-      title: 'Comfirm Delete?',
-      message: 'You want to cancel this booked',
-      buttons: [
-        {
-          text: 'Yes',
-          handler: () => {
-            console.log('Agree clicked');
-          }
-        },
-        {
-          text: 'No',
-          handler: () => {
-            console.log('Disagree clicked');
+setData(){
+  this.storage.get('member').then((val) => {
+    this.json = JSON.stringify({ member: val , date: this.myDate});
+    var url = 'http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/service/selectBookingHistory.php?data=' + this.json;
+    console.log(url);
+    this.httpClient.get(url)
+      .subscribe(
+      (data: any) => {
+        this.histoty = data;
+        console.log(this.histoty)
+      }
+      );
+  });
+}
+
+
+goToDelete(id) {
+  let confirm = this.alertCtrl.create({
+    title: 'Comfirm Delete?',
+    message: 'You want to cancel this booked',
+    buttons: [
+      {
+        text: 'Yes',
+        handler: () => {
+          console.log('Agree clicked');
+        }
+      },
+      {
+        text: 'No',
+        handler: () => {
+          console.log('Disagree clicked');
+        }
+      }
+    ]
+  });
+  confirm.present();
+
+}
+
+changDate(date){
+  console.log(date);
+  this.myDate = date.split('T')[0];
+  this.setData();
+}
+
+delete(id){
+  this.json = JSON.stringify({ id: id});
+      var url = 'http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/service/deleteBookingHistory.php?data=' + this.json;
+      console.log(url);
+      this.httpClient.get(url)
+        .subscribe(
+        (data: any) => {
+          console.log(data)
+          if(data == 'SUCCESS'){
+            this.setData();
+          }else{
+            console.log(data);
           }
         }
-      ]
-    });
-    confirm.present();
-    
-  }
+);
 
-  changDate(date){
-    //2017-12-21T18:56:02.814Z
-    this.n = date.indexOf("T");
-    this.y = date.substring(0,this.n).split('-')[0];
-    this.m = date.substring(0,this.n).split('-')[1];
-    this.d = date.substring(0,this.n).split('-')[2];
-    // console.log(this.d);
-    for(this.i=0;this.i<12;this.i++){
-      if(this.m == this.month[this.i][0].id){
-        this.m2 = this.month[this.i][1].name;
-      }
-    }
-    this.myDate = "" + this.d + " " + this.m2 + " " +  this.y;
-    console.log(this.myDate);
-  }
+}
 
 }
