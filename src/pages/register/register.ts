@@ -32,11 +32,11 @@ export class RegisterPage {
   myDate: any;
   pushPincode: any;
   json: any;
-  idcard:any;
-  tel:any;
-  response:any;
+  idcard: any;
+  tel: any;
+  response: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
-    private storage: Storage,private httpClient:HttpClient) {
+    private storage: Storage, private httpClient: HttpClient) {
     this.date = new Date().toISOString();
     this.pushPincode = SetpincodePage;
     this.month = [[{ id: 1 }, { name: 'January' }], [{ id: 2 }, { name: 'February' }],
@@ -73,57 +73,64 @@ export class RegisterPage {
   }
 
   goNextPincode(idcard, gender, firstname, lastname, date, age, tel, address, income, weight, height, disese, email, condition) {
-    console.log(condition);
+    console.log(idcard);
+    if(idcard != undefined && gender != undefined && firstname != undefined  && lastname != undefined  && date != undefined  && age != undefined  && tel != undefined  && address != undefined && income != undefined  && weight != undefined  && height != undefined  && disese != undefined  && email  != undefined){
+      if (condition == true) {
+        this.json = JSON.stringify({
+          "idCard": "" + idcard,
+          "gender": "" + gender,
+          "firtname": "" + firstname,
+          "lastname": "" + lastname,
+          "birthday": "" + this.date,
+          "age": "" + age,
+          "address": "" + address,
+          "tel": "" + tel,
+          "weight": "" + weight,
+          "height": "" + height,
+          "disease": "" + disese,
+          "email": "" + email,
+          "income": "" + income,
+          "accept": "" + condition,
+          "pincode": ""
+        });
+        console.log(this.json);
 
-    if (condition == true) {
-      this.json = JSON.stringify({
-        "idCard": "" + idcard,
-        "gender": "" + gender,
-        "firtname": "" + firstname,
-        "lastname": "" + lastname,
-        "birthday": "" + this.date,
-        "age": "" + age,
-        "address": "" + address,
-        "tel": "" + tel,
-        "weight": "" + weight,
-        "height": "" + height,
-        "disease": "" + disese,
-        "email": "" + email,
-        "income": "" + income,
-        "accept": "" + condition,
-        "pincode": ""
-      });
-      console.log(this.json);
-
-      var url = 'http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/service/registerApplication.php?data=' + this.json;
-      console.log(url);
-      this.httpClient.get(url)
-        .subscribe(
-        (data: any) => {
-          console.log(data)
-          if(data.result === 'SUCCESS'){
-            console.log(data.member)
-            this.storage.set('member', data.member);
-            this.navCtrl.push(this.pushPincode);
-          }else{
-            let alert = this.alertCtrl.create({
-              title: '<img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/signFalse.png" width="70px" height="70px">',
-              subTitle: 'บันทึกไม่สำเร็จ',
-              cssClass: 'alertDanger'
-            });
-            alert.present();
+        var url = 'http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/service/registerApplication.php?data=' + this.json;
+        console.log(url);
+        this.httpClient.get(url)
+          .subscribe(
+          (data: any) => {
+            console.log(data)
+            if (data.result === 'SUCCESS') {
+              console.log(data.member)
+              this.storage.set('member', data.member);
+              this.navCtrl.push(this.pushPincode);
+            } else {
+              let alert = this.alertCtrl.create({
+                title: '<img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/signFalse.png" width="70px" height="70px">',
+                subTitle: 'บันทึกไม่สำเร็จ',
+                cssClass: 'alertDanger'
+              });
+              alert.present();
+            }
           }
-        }
-      );
-      
-    
-    } else {
+          );
+
+
+      } else {
         let alert = this.alertCtrl.create({
           title: '<img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/signWarning.png" width="70px" height="70px">',
           subTitle: 'กรุณากดยอมรับเงื่อนไข',
         });
         alert.present();
 
+      }
+    } else {
+      let alert = this.alertCtrl.create({
+        title: '<img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/signWarning.png" width="70px" height="70px">',
+        subTitle: 'กรุณากรอกข้อมูลให้ครบถ้วน',
+      });
+      alert.present();
     }
   }
 
@@ -144,20 +151,20 @@ export class RegisterPage {
     console.log(this.myDate);
   }
 
-  setIdCard(event:any){
-    if(event.target.value.length == 1){
+  setIdCard(event: any) {
+    if (event.target.value.length == 1) {
       this.idcard = this.idcard + "-"
-    }else if(event.target.value.length == 6){
+    } else if (event.target.value.length == 6) {
       this.idcard = this.idcard + "-"
-    }else if(event.target.value.length == 12){
+    } else if (event.target.value.length == 12) {
       this.idcard = this.idcard + "-"
-    }else if(event.target.value.length == 15){
+    } else if (event.target.value.length == 15) {
       this.idcard = this.idcard + "-"
     }
   }
 
-  setTel(event:any){
-    if(event.target.value.length == 2){
+  setTel(event: any) {
+    if (event.target.value.length == 2) {
       this.tel = this.tel + "-"
     }
   }

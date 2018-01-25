@@ -208,7 +208,7 @@ export class BookingPage {
 
     }
     );
-
+ 
   }
 
   setBooking() {
@@ -231,12 +231,11 @@ export class BookingPage {
           for (var l = hourS; l <= hourE; l++) {
             if (l == hourS) {
               if (minuteS > 0) {
-
                 this.booking.push({
                   status: data[i].status,
                   type: data[i].type_equipment,
                   id: data[i].id_equipment,
-                  time: l + ":" + minuteS + "-" + (l + 1) + ":00"
+                  time: l + ":30" + "-" + (l + 1) + ":00"
                 });
 
               } else {
@@ -260,16 +259,14 @@ export class BookingPage {
               }
 
             } else if (l == hourE) {
-              if (hourE - hourS > 1) {
+              if (hourE - hourS >= 1) {
                 if (minuteE > 0) {
-
                   this.booking.push({
                     status: data[i].status,
                     type: data[i].type_equipment,
                     id: data[i].id_equipment,
                     time: l + ":00" + "-" + l + ":" + minuteE
-                  });
-
+                  });               
                 }
               }
             } else {

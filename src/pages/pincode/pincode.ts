@@ -40,7 +40,8 @@ export class PincodePage {
   add(value) {
     if (this.passcode.length != 4) {
       this.passcode = this.passcode + value;
-    } else {
+    }
+    if(this.passcode.length == 4){
       if (this.id == 1) {
         if (this.passcode == this.code) {
           //set pincode
@@ -89,11 +90,11 @@ export class PincodePage {
             (data: any) => {
               console.log(data)
               if (data.result === 'SUCCESS') {
-                let alert = this.alertCtrl.create({
-                  title: '<img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/signTrue.png" width="70px" height="70px">',
-                  subTitle: 'สำเร็จ',
-                });
-                alert.present();
+                // let alert = this.alertCtrl.create({
+                //   title: '<img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/signTrue.png" width="70px" height="70px">',
+                //   subTitle: 'สำเร็จ',
+                // });
+                // alert.present();
                 this.navCtrl.push(this.pushTabsPage);
               } else {
                 let alert = this.alertCtrl.create({

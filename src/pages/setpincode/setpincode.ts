@@ -29,7 +29,8 @@ export class SetpincodePage {
   add(value) {
     if (this.passcode.length != 4) {
       this.passcode = this.passcode + value;
-    } else {
+    }
+    if(this.passcode.length == 4){
       // this.passcode = this.passcode + value;
       console.log(this.passcode);
       console.log("Login");

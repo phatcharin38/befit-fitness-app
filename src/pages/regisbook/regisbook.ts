@@ -190,7 +190,7 @@ export class RegisbookPage {
       // var e = JSON.parse(equipment);
       console.log(equipment.split(";")[0]);
       this.storage.get('member').then((val) => {
-        var json = JSON.stringify({ date: this.date2, id: equipment.split(";")[0], type: equipment.split(";")[1], timeS: timeStart, timeE: timeEnd, code: this.codeFitness, member: val });
+        var json = JSON.stringify({ date: this.date2, id: equipment.split(";")[0], type: equipment.split(";")[1], timeS: timeStart, timeE: timeEnd, code: this.codeFitness, member: val, status:'booking'});
         console.log(json);
         var url = 'http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/service/saveBookingApplication.php?data=' + json;
         console.log(url);
@@ -198,20 +198,20 @@ export class RegisbookPage {
           .subscribe(
           (data: any) => {
             console.log(data)
-            if (data == 'SUCCESS') {
+            if (data[0].result == 'SUCCESS') {
               let alert = this.alertCtrl.create({
                 title: '<img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/signTrue.png" width="70px" height="70px">',
                 subTitle: 'สำเร็จ',
               });
               alert.present();
               this.setData();
-            } else if(data == 'TIME'){
+            } else if(data[0].result == 'TIME'){
               let alert = this.alertCtrl.create({
                 title: '<img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/signWarning.png" width="70px" height="70px">',
-                subTitle: 'เวลาที่ท่านเลือกทำการไม่สมารถจองได้',
+                subTitle: 'กรุณาเลือกเวลาใหม่',
               });
               alert.present();
-            } else if(data == 'ERROR'){
+            } else if(data[0].result == 'ERROR'){
               let alert = this.alertCtrl.create({
                 title: '<img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/signFalse.png" width="70px" height="70px">',
                 subTitle: 'ไม่สามารถจองได้',

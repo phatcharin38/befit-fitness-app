@@ -136,30 +136,21 @@
 }
 
 .btn_login {
-    background-color: #b1e67c;
+    background-color: #c9f1a0;
     color: #161616;
     text-align: center;
     border-radius: 4px;
+    border: 1px solid #aef16b;
 }
 
 .btn_next {
-    background-color: #9ae64a;
+    background-color: #bbe98a;
     color: #161616;
     text-align: center;
     border-radius: 4px;
+    border: 1px solid #7ef760;
 }
 
-// .btn_login:active {
-//     background-color: #ffffff;
-// }
-
-// .padding_item2{
-//     background-color: rgba($color: #c2bdbd, $alpha: 0);
-// }
-
-// .padding_item {
-//     padding: 1% 5% 1% 5%;
-// }
 
 .padding_item_data {
     background-color: rgba($color: #a39f9f, $alpha: 0.7);
@@ -348,17 +339,20 @@
     }
 
     .btn_edit {
-        background-color: #e8f083;
+        background-color: #e7ec9a;
         color: #161616;
         text-align: center;
         border-radius: 4px;
+        border: 1px solid #edf760;
     }
 
     .btn_delete {
-        background-color: #f09c9c;
+        background-color: #f3c4c4;
         color: #161616;
         text-align: center;
         border-radius: 4px;
+        // border-color:#f16d6d;
+        border: 1px solid #f76060;
     }
 
     ion-scroll {
@@ -383,4 +377,14 @@
         padding: 24px 24px 20px;
     }
 
+    .bg-report{
+        background:#e2faca;
+        padding:3%;
+        border-radius:4px;
+        text-align:center;
+        border-color:#baed88;
+        border-style: solid;
+    }
+
+   
     

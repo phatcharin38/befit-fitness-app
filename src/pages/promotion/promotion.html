@@ -1,77 +1,31 @@
 <ion-header>
-    <ion-navbar color='navbarColor'>
-        <ion-title>
-            <ion-grid>
-              <ion-row>
-                <ion-col col-12 style="font-size:20px">BeFit Fitness</ion-col>
-              </ion-row>
-            </ion-grid>
-          </ion-title>
-    </ion-navbar>
-  </ion-header>
+  <ion-navbar color='navbarColor'>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      <ion-label>โฆษณา</ion-label>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
 
 <ion-content class="bg-style2">
   <div class="card-background-page">
-    <ion-card *ngFor="let item of promotions">
+    <ion-card *ngFor="let item of promotions" >
       <img src= {{item.image}} width="100%" height="150px" style="opacity: 0.7;" />
       <div class="card-title">{{item.name_fitness}}</div>
       <div class="detail-head">Promotion!!
-        <span class="rating">
-            <ion-icon  name="star" color="star"></ion-icon>
-            <ion-icon  name="star" color="star"></ion-icon>
-            <ion-icon  name="star" color="star"></ion-icon>
+        <span class="rating" *ngFor="let rate of rating" >
+          <span *ngIf="item.code_fitness == rate.id">
+              <ion-icon  name="star" color="star" *ngFor="let star of rate.sum"></ion-icon> 
+          </span>           
         </span>        
       </div>
       <div class="detail">{{item.detail_pro}}</div>
       <div class="buttonTic">
-        <a (click)="getTicket(item.code_promotion)">Got It</a>
+        <a (click)="getTicket(item.code_promotion)">รับโปรโมชั่น</a>
       </div>
-    </ion-card>
-    <!-- <ion-card>
-        <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/ksb2.jpg" width="100%" height="150px" style="opacity: 0.7;" />
-        <div class="card-title">KSB Gym</div>
-        <div class="detail-head">Promotion!!
-          <span class="rating">
-              <ion-icon  name="star" color="star"></ion-icon>
-              <ion-icon  name="star" color="star"></ion-icon>
-          </span>        
-        </div>
-        <div class="detail">Packge 3 Month 2599 THB</div>
-        <div class="buttonTic">
-          <a (click)="getTicket()">Got It</a>
-          </div>
-      </ion-card>
-
-      <ion-card>
-          <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/maungthai.jpg" width="100%" height="150px" style="opacity: 0.7;" />
-          <div class="card-title">Maungthai Fitness</div>
-          <div class="detail-head">Promotion!!
-            <span class="rating">
-                <ion-icon  name="star" color="star"></ion-icon>
-                <ion-icon  name="star" color="star"></ion-icon>
-                <ion-icon  name="star" color="star"></ion-icon>
-            </span>        
-          </div>
-          <div class="detail">Packge 3 Month 2599 THB</div>
-          <div class="buttonTic">
-            <a (click)="getTicket()">Got It</a>
-            </div>
-        </ion-card>
-
-        <ion-card>
-            <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/fitnessfirst.jpg" width="100%" height="150px" style="opacity: 0.7;" />
-            <div class="card-title">Fitness First</div>
-            <div class="detail-head">Promotion!!
-              <span class="rating">
-                  <ion-icon  name="star" color="star"></ion-icon>
-              </span>        
-            </div>
-            <div class="detail">Packge 6 Month 6599S THB</div>
-            <div class="buttonTic">
-              <a (click)="getTicket()">Got It</a>
-              </div>
-          </ion-card> -->
-
+    </ion-card> 
   </div>
 
 </ion-content>

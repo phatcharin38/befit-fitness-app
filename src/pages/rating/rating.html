@@ -1,28 +1,29 @@
-<!--
-  Generated template for the RegisterPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<!-- <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-<link href="https://code.ionicframework.com/nightly/css/ionic.min.css" rel="stylesheet">
-<script src="https://code.ionicframework.com/nightly/js/ionic.bundle.js"></script> -->
+<ion-header>
+  <ion-navbar color='navbarColor'>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      <ion-label>ประเมิน Fitness</ion-label>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
 
 <ion-content class="bg-style2">
   <div class="padding">
     <div class="bg-padding">
 
-      <h1 style="text-align:center">
+      <!-- <h1 style="text-align:center">
         <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/logo_befit2.png" width="130px" height="100px" />
-      </h1>
-
-      <div style="background:#baed88;padding:1%;border-radius:4px">
+      </h1> -->
+      <div style="padding-top:5%">
+        <div class="bg-report">
         <ion-segment [(ngModel)]="rating">
           <ion-segment-button value="fitness">
             ประเมิน Fitness
           </ion-segment-button>
           <ion-segment-button value="system">
-            ประเมินระบบ
+            แจ้งปัญหาการใช้งาน
           </ion-segment-button>
         </ion-segment>
 
@@ -89,57 +90,37 @@
 
           <!-- condition -->
           <ion-grid *ngSwitchCase="'system'">
-              <ion-row class="row-style" style="padding-top:5%">
-                  <ion-col col-12 style="text-align:center" *ngIf="emoSys == 0">
-                      <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/emotion0.png" width="100px" height="120px" /> <br>
-                      ระดับ
-                   </ion-col>
-                   <ion-col col-12 style="text-align:center" *ngIf="emoSys == 1">
-                      <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/emotion1.png" width="100px" height="120px" /><br>
-                      แย่มาก         
-                   </ion-col>
-                   <ion-col col-12 style="text-align:center" *ngIf="emoSys == 2">
-                      <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/emotion2.png" width="100px" height="120px" /><br>     
-                      แย่       
-                   </ion-col>
-                   <ion-col col-12 style="text-align:center" *ngIf="emoSys == 3">
-                      <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/emotion3.png" width="100px" height="120px" /><br>  
-                      พอใช้          
-                   </ion-col>
-                   <ion-col col-12 style="text-align:center" *ngIf="emoSys == 4">
-                      <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/emotion4.png" width="100px" height="120px" /><br>   
-                      ดี         
-                   </ion-col>
-                   <ion-col col-12 style="text-align:center" *ngIf="emoSys == 5">
-                      <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/emotion5.png" width="100px" height="120px" /><br>      
-                      ดีมาก      
-                   </ion-col>
+              <ion-row class="row-style">
+                  <ion-col col-4 style="text-align:right">
+                    <ion-label>เลือก Fitness :</ion-label>
+                  </ion-col>
+                  <ion-col col-8>
+                    <ion-select [(ngModel)]="selectFitnessVal">
+                      <ion-option value={{item.code_fitness}} *ngFor="let item of fitness">{{item.name_fitness}}</ion-option>                
+                    </ion-select>
+                  </ion-col>
+              </ion-row>
+              <ion-row class="row-style">
+                  <ion-col col-12 style="text-align:start">
+                    เรื่อง
+                  </ion-col>
                 </ion-row>
-              <ion-row class="row-style">
-                <ion-col col-12 style="text-align:center">   
-                    <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/emotion1.png" width="45px" height="60px" (click) = "changeEmoSystem(1);"/>            
-        
-                    <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/emotion2.png" width="45px" height="60px" (click) = "changeEmoSystem(2);"/>                         
-  
-                    <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/emotion3.png" width="45px" height="60px" (click) = "changeEmoSystem(3);"/>                          
-        
-                    <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/emotion4.png" width="45px" height="60px" (click) = "changeEmoSystem(4);"/>                     
-  
-                    <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/emotion5.png" width="45px" height="60px" (click) = "changeEmoSystem(5);"/>                         
-                </ion-col>
+                <ion-row class="row-style">
+                  <ion-col col-12>
+                    <ion-textarea [(ngModel)]="text" rows="5"></ion-textarea>
+                  </ion-col>
               </ion-row>
-              <ion-row class="row-style">
+              <ion-row class="row-style" style="padding:3%">
                   <ion-col col-12 style="text-align:center">
-                      <button ion-button color="btn_login" class="btn_login" (click) = "send('S');">ส่งคะแนน</button>
-                   </ion-col>
-              </ion-row>
-
+                  <button ion-button color="btn_login" class="btn_login" (click)="sendproblem(selectFitnessVal,text);">แจ้งปัญหา</button>
+              </ion-col>
+            </ion-row>
           </ion-grid>
         </div>
         <!-- /rating -->
 
       </div>
-
+      </div>
     </div>
   </div>
 </ion-content>

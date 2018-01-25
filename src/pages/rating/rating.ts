@@ -21,6 +21,9 @@ export class RatingPage {
   rating : string = 'fitness';
   fitness : any;
   selectfitness : String = "";
+  text: string = "";
+  selectFitnessVal = "";
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private httpClient: HttpClient,
     private alertCtrl: AlertController) {
     this.setAllFitness();
@@ -78,7 +81,7 @@ export class RatingPage {
 
                 this.changeEmo(0);
                 this.selectfitness = "";
-              }
+              } 
             }
           );
           //http
@@ -111,5 +114,40 @@ export class RatingPage {
       }
     }
   } //SEND
+
+  sendproblem(id, text) {
+    if (id == "" || text == "") {
+      let alert = this.alertCtrl.create({
+        title: '<img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/signWarning.png" width="70px" height="70px">',
+        subTitle: 'กรุณาเลือกใส่ข้อมูลให้เรียบร้อย',
+      });
+      alert.present();  
+    }else{
+      var json = JSON.stringify({ id: id, text: text });
+      var url = 'http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/service/sendNoticeApplication.php?data=' + json;
+      console.log(url);
+      this.httpClient.get(url)
+        .subscribe(
+        (data: any) => {
+          console.log(data)
+          if (data == 'SUCCESS') {
+            let alert = this.alertCtrl.create({
+              title: '<img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/signTrue.png" width="70px" height="70px">',
+              subTitle: 'สำเร็จ',
+            });
+            alert.present();
+            this.setData();
+          } else {
+            console.log(data);
+          }
+        });
+    }
+
+  }
+  setData() {
+    this.text = "";
+    this.selectFitnessVal = "";
+  }
+  
       
 }

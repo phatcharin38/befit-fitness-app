@@ -64,7 +64,12 @@ export class MapPage {
             console.log(data[key].latitude + "   " + data[key].longitude);
             //add fitness
             const location = new google.maps.LatLng(data[key].latitude, data[key].longitude);
-            var image2 = "http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/icon-map.png";
+            var image2 = "";
+            if(data[key].booking_system == "YES"){
+              image2 = "http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/icon-mapbook.png";
+            }else{
+              image2 = "http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/icon-map.png";
+            }
             this.addMarker(location, this.map,data[key].id,image2);
             
           }
@@ -78,7 +83,6 @@ export class MapPage {
 
   addMarker(position, map,text,image) { 
     if(text == 'You'){
-
       var marker = new google.maps.Marker({
         position : position,
         title: text,
@@ -94,16 +98,16 @@ export class MapPage {
       });
       
     }else{
-    var marker = new google.maps.Marker({
-      position : position,
-      title: text,
-      map: map,
-      icon: image
-    });
-    google.maps.event.addListener(marker, 'click', () => {
-      //infoWindow.open(this.map, marker);
-      this.navCtrl.push(FitnessPage,{id:text});
-    });
+      var marker = new google.maps.Marker({
+        position : position,
+        title: text,
+        map: map,
+        icon: image
+      });
+      google.maps.event.addListener(marker, 'click', () => {
+        //infoWindow.open(this.map, marker);
+        this.navCtrl.push(FitnessPage,{id:text});
+      });
   }
 }
 

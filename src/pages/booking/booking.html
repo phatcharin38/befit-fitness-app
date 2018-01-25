@@ -6,12 +6,11 @@
 -->
 <ion-header>
   <ion-navbar color='navbarColor'>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>
-      <ion-grid>
-        <ion-row>
-          <ion-col col-12 style="font-size:20px">BeFit Fitness</ion-col>
-        </ion-row>
-      </ion-grid>
+      <ion-label>ตารางข้อมูลการจอง</ion-label>
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -20,28 +19,36 @@
 <ion-content class="bg-style2">
   <div class="padding">
     <div class="bg-padding">
-      
+
       <div style="padding-top:5%">
         <ion-item style="background:#baed88;border-radius:4px;padding:1%;padding-left:3%">
           <ion-select [(ngModel)]="selectFitnessVal" (ionChange)="viewBooking($event)">
-            <ion-option *ngFor="let item of fitness" value= {{item.id}}>{{item.name_fitness}}</ion-option>
+            <ion-option *ngFor="let item of fitness" value={{item.id}}>{{item.name_fitness}}</ion-option>
           </ion-select>
         </ion-item>
       </div>
 
       <div style="padding-top:3%">
-        <div style="background:#baed88;padding:1%;border-radius:4px">
+        <div class="bg-report" style="padding:0%">
           <div *ngIf="checkBooking == 'YES'">
             <ion-grid>
               <ion-row>
-                <ion-col col-2>
-                  <button ion-button color="btn_login" class="btn_login" (click)="goToBook(selectFitnessVal)">จอง</button> 
+                <ion-col col-2 style="text-align:left">
+                  <button ion-button color="btn_login" class="btn_login" (click)="goToBook(selectFitnessVal)">จอง</button>
                 </ion-col>
-                <ion-col col-7>
-                 </ion-col>
-                <ion-col col-2>
-                    <button ion-button color="btn_login" class="btn_login" (click)="goToReport(selectFitnessVal)">รายงาน</button>
-                 </ion-col>
+                <ion-col col-6>
+                </ion-col>
+                <ion-col col-2 style="text-align:right">
+                  <button ion-button color="btn_login" class="btn_login" (click)="goToReport(selectFitnessVal)">รายงาน</button>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-6 >
+                    <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/statusBooking.png" width="20%" height="50%"> อยู่ระหว่างการจอง
+                </ion-col>
+                <ion-col col-6 >
+                    <img src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/statusRunning.png" width="20%" height="50%"> อยู่ระหว่างการใช้งาน
+                </ion-col>
               </ion-row>
             </ion-grid>
             <ion-scroll scrollX="true" scrollY="true">
@@ -52,18 +59,18 @@
 
                   <tr *ngFor="let euipment of equipment;">
                     <td width="15%" style="background-color:#accbe2;">{{euipment.name}}</td>
-                   
+
                     <td *ngFor="let time of time" style="text-align:center">
                       <div *ngFor="let itemBook of booking">
                         <div *ngIf="itemBook.time == time && euipment.id == itemBook.id && euipment.type == itemBook.type">
                           <img *ngIf="itemBook.status == 'booking'" src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/statusBooking.png"
-                            width="15px" height="15px">
+                            width="25%" height="15%">
                           <img *ngIf="itemBook.status == 'running'" src="http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/image-mobile/statusRunning.png"
-                            width="15px" height="15px">
+                            width="30%" height="20%">
                         </div>
                       </div>
                     </td>
-                 
+
                   </tr>
 
                 </table>

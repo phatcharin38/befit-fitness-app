@@ -24,7 +24,7 @@ export class ReportPage {
 
   //line
   public lineChartData: { data: Number[], label: String }[] = [
-    { data: [], label: 'จำนวนครั้ง' }
+    { data: [], label: 'จำนวนวัน' }
   ];
   public lineChartLabels: Array<any> = [];
   public lineChartOptions: any = { responsive: true };
@@ -72,9 +72,11 @@ export class ReportPage {
   mounth: number[];
   fitness: string[] = [];
   count: number[] = [];
+  date = (new Date()).getFullYear();
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage,
-    private httpClient: HttpClient) {
+    private httpClient: HttpClient) {     
+      console.log(this.date);
       this.refresh();
   }
 
@@ -149,25 +151,18 @@ export class ReportPage {
   }
 
   setDataReportLine() {
+    console.log(this.date);
     this.storage.get('member').then((val) => {
-      var json = JSON.stringify({ member: val });
+      var json = JSON.stringify({ member: val , year : this.date});
       //***************************************************************** */
       var url2 = 'http://it2.sut.ac.th/prj60_g43/g43/befit-fitness/service/selectChartMonth.php?data=' + json;
       this.httpClient.get(url2)
         .subscribe(
         (response: any) => {
           this.mounth = [];
-          var c = 0;
           console.log(response)
-          for (var j = 1; j <= 12; j++) {
-            c = 0;
-            for (var i in response) {
-              var m = Number(response[i].booking_date.split("-")[1]);
-              if (j == m) {
-                c = c + 1;
-              }
-            }
-            this.mounth.push(c);
+          for (var j in response) {
+            this.mounth.push(response[j].count);
           }
           this.lineChartLabels = ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'];
           this.lineChartData[0].data = this.mounth;
